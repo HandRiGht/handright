@@ -1,5 +1,5 @@
 import * as WebBrowser from 'expo-web-browser';
-import React from 'react';
+import React, {Component} from 'react';
 import {
   Image,
   Platform,
@@ -8,93 +8,81 @@ import {
   Text,
   TouchableOpacity,
   View,
+  Picker,
+  Button,
 } from 'react-native';
 
 import { MonoText } from '../components/StyledText';
 
-export default function HomeScreen() {
-  return (
-    <View style={styles.container}>
-      <ScrollView
-        style={styles.container}
-        contentContainerStyle={styles.contentContainer}>
-        <View style={styles.welcomeContainer}>
-          <Image
-            source={
-              __DEV__
-                ? require('../assets/images/robot-dev.png')
-                : require('../assets/images/robot-prod.png')
-            }
-            style={styles.welcomeImage}
-          />
+export default class HomeScreen extends Component  {
+
+  constructor(props) {
+    super (props);
+
+    this.state = {
+      language: ''
+    }
+  }
+
+  render()
+  {
+    return (
+        <View style={styles.container}>
+
+            <View style={styles.welcomeContainer}>
+              <Image
+                  source={
+                    __DEV__
+                        ? require('/Users/olasubomiawolesi/handright/Logo2.png')
+                        : require('../assets/images/robot-prod.png')
+                  }
+                  style={styles.welcomeImage}
+              />
+            </View>
+
+            <View style={styles.getStartedContainer}>
+              <Text> You have selected: {this.state.language}</Text>
+              <Picker style={styles.getLanguagePicker}
+                      selectedValue={this.state.language}
+                      style={{height: 50, width: 200}}
+                      onValueChange={(itemValue, itemIndex) =>
+                          this.setState({language: itemValue})
+                      }>
+                <Picker.Item label="English" value="English" />
+                <Picker.Item label="French" value="French" />
+                <Picker.Item label="German" value="German" />
+                <Picker.Item label="Italian" value="Italian" />
+                <Picker.Item label="Portuguese" value="Portuguese" />
+                <Picker.Item label="Spanish" value="Spanish" />
+              </Picker>
+            </View>
+            <View style={styles.getButtonContainer}>
+              <View style={styles.button_1}>
+                <Button
+                    title="Learner"
+                    onPress={() => {
+                      console.log('clicked');
+                    }}
+                />
+              </View>
+              <View style={styles.button_1}>
+                <Button
+                    title="Improver"
+                    onPress={() => {
+                      console.log('clicked');
+                    }}
+                />
+              </View>
+            </View>
         </View>
+    );
+  }
 
-        <View style={styles.getStartedContainer}>
-          <DevelopmentModeNotice />
-
-          <Text style={styles.getStartedText}>Get started by opening</Text>
-
-          <View
-            style={[styles.codeHighlightContainer, styles.homeScreenFilename]}>
-            <MonoText>screens/HomeScreen.js</MonoText>
-          </View>
-
-          <Text style={styles.getStartedText}>
-            Change this text and your app will automatically reload.
-          </Text>
-        </View>
-
-        <View style={styles.helpContainer}>
-          <TouchableOpacity onPress={handleHelpPress} style={styles.helpLink}>
-            <Text style={styles.helpLinkText}>
-              Help, it didn’t automatically reload!
-            </Text>
-          </TouchableOpacity>
-        </View>
-      </ScrollView>
-
-      <View style={styles.tabBarInfoContainer}>
-        <Text style={styles.tabBarInfoText}>
-          This is a tab bar. You can edit it in:
-        </Text>
-
-        <View
-          style={[styles.codeHighlightContainer, styles.navigationFilename]}>
-          <MonoText style={styles.codeHighlightText}>
-            navigation/MainTabNavigator.js
-          </MonoText>
-        </View>
-      </View>
-    </View>
-  );
 }
 
 HomeScreen.navigationOptions = {
   header: null,
 };
-
-function DevelopmentModeNotice() {
-  if (__DEV__) {
-    const learnMoreButton = (
-      <Text onPress={handleLearnMorePress} style={styles.helpLinkText}>
-        Learn more
-      </Text>
-    );
-
-    return (
-      <Text style={styles.developmentModeText}>
-        Development mode is enabled: your app will be slower but you can use
-        useful development tools. {learnMoreButton}
-      </Text>
-    );
-  } else {
-    return (
-      <Text style={styles.developmentModeText}>
-        You are not in development mode: your app will run at full speed.
-      </Text>
-    );
-  }
-}
 
 function handleLearnMorePress() {
   WebBrowser.openBrowserAsync(
@@ -112,31 +100,36 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-  },
-  developmentModeText: {
-    marginBottom: 20,
-    color: 'rgba(0,0,0,0.4)',
-    fontSize: 14,
-    lineHeight: 19,
-    textAlign: 'center',
+    alignItems: 'center',
   },
   contentContainer: {
     paddingTop: 30,
   },
   welcomeContainer: {
     alignItems: 'center',
-    marginTop: 10,
+    marginTop: 60,
     marginBottom: 20,
   },
   welcomeImage: {
-    width: 100,
-    height: 80,
+    width: 150,
+    height: 120,
     resizeMode: 'contain',
     marginTop: 3,
     marginLeft: -10,
   },
   getStartedContainer: {
     alignItems: 'center',
+    marginHorizontal: 50,
+    marginTop: 25,
+    flex: 1,
+  },
+  getLanguagePicker:{
+
+  },
+  getButtonContainer:{
+    flexDirection: 'row',
+    flex: 1,
+    marginTop: 40,
     marginHorizontal: 50,
   },
   homeScreenFilename: {
