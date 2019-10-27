@@ -42,30 +42,29 @@ export default class HomeScreen extends Component  {
               <Text> You have selected: {this.state.language}</Text>
               <Picker style={styles.getLanguagePicker}
                       selectedValue={this.state.language}
-                      style={{height: 50, width: 200}}
                       onValueChange={(itemValue, itemIndex) =>
                           this.setState({language: itemValue})
                       }>
-                <Picker.Item label="English" value="English" />
-                <Picker.Item label="French" value="French" />
-                <Picker.Item label="German" value="German" />
-                <Picker.Item label="Italian" value="Italian" />
+                <Picker.Item label="English"    value="English" />
+                <Picker.Item label="French"     value="French" />
+                <Picker.Item label="German"     value="German" />
+                <Picker.Item label="Italian"    value="Italian" />
                 <Picker.Item label="Portuguese" value="Portuguese" />
-                <Picker.Item label="Spanish" value="Spanish" />
+                <Picker.Item label="Spanish"    value="Spanish" />
               </Picker>
-            </View>
-            <View style={styles.getButtonContainer}>
-              <TouchableOpacity onPress = {() => {/* do this */}}>
-                <View style = {styles.button_1}                >
-                <Text style = {{color: 'white'}}>Learner</Text>
-                </View>
-              </TouchableOpacity>
-              <TouchableOpacity onPress = {() => {this.props.navigation.navigate("improver");}}>
-                <View style = {styles.button_1}                >
-                  <Text style = {{color: 'white'}}>Improver</Text>
-                </View>
-              </TouchableOpacity>
-            </View>
+              </View>
+              <View style={styles.getButtonContainer}>
+                <TouchableOpacity onPress = {() => {this.props.navigation.navigate("improver");}}>
+                  <View style = {styles.button_1}                >
+                  <Text style = {{color: 'white'}}>Learner</Text>
+                  </View>
+                </TouchableOpacity>
+                <TouchableOpacity onPress = {() => {this.props.navigation.navigate("improver");}}>
+                  <View style = {styles.button_1}>
+                    <Text style = {{color: 'white'}}>Improver</Text>
+                  </View>
+                </TouchableOpacity>
+              </View>
         </View>
     );
   }
@@ -128,7 +127,8 @@ const styles = StyleSheet.create({
     bottom:-70,
   },
   getLanguagePicker:{
-
+    height: 50,
+    width: 200,
   },
   getButtonContainer:{
     flexDirection: 'row',
