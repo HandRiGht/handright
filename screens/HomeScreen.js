@@ -58,6 +58,7 @@ export default class HomeScreen extends Component  {
             </View>
             <View style={styles.getButtonContainer}>
               <View style={styles.button_1}>
+
                 <Button
                     title="Learner"
                     backgroundColor='#DDDDDD'
@@ -70,7 +71,8 @@ export default class HomeScreen extends Component  {
                 <Button
                     title="Improver"
                     onPress={() => {
-                      console.log('clicked');
+                      this.props.navigation.navigate("improver");
+
                     }}
                 />
               </View>

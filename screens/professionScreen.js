@@ -14,25 +14,24 @@ import {
 
 import { MonoText } from '../components/StyledText';
 
-export default class HomeScreen extends Component {
+export default class HomeScreen extends Component  {
 
     constructor(props) {
-        super(props);
+        super (props);
 
         this.state = {
             language: ''
         }
     }
-
     render() {
         return (
             <View style={styles.getStartedContainer}>
-                <Text> You have selected: {this.state.language}</Text>
+                <Text> You have selected: {this.state.profession}</Text>
                 <Picker style={styles.getLanguagePicker}
-                        selectedValue={this.state.language}
+                        selectedValue={this.state.profession}
                         style={{height: 50, width: 200}}
                         onValueChange={(itemValue, itemIndex) =>
-                            this.setState({language: itemValue})
+                            this.setState({profession: itemValue})
                         }>
                     <Picker.Item label="General" value="General"/>
                     <Picker.Item label="Healthcare professional" value="Healthcare professional"/>
@@ -45,3 +44,14 @@ export default class HomeScreen extends Component {
         );
     }
 }
+
+const styles = StyleSheet.create({
+
+    getStartedContainer: {
+        alignItems: 'center',
+        marginHorizontal: 50,
+        marginTop: 25,
+        flex: 1,
+    },
+}
+);
