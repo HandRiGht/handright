@@ -2,11 +2,12 @@ import Expo from 'expo';
 import * as ExpoPixi from 'expo-pixi';
 import React, { Component } from 'react';
 import { Image, Platform, AppState, StyleSheet, Text, View } from 'react-native';
-import { Card, CardItem, Button} from 'native-base';
-import axios from 'axios';
+import { Card, CardItem, Button, Body} from 'native-base';
+import axios from 'axios'
 import * as FileSystem from 'expo-file-system';
 import { Base64 } from 'js-base64';
 import randomWords from 'random-words';
+import Modal from "react-native-modal";
 
 const isAndroid = Platform.OS === 'android';
 function uuidv4() {
@@ -25,7 +26,8 @@ export default class App extends Component {
     strokeWidth: 5,
     alpha: 0.5,
     appState: AppState.currentState,
-    word: null
+    word: null,
+    isModalVisible: false
   };
 
   handleAppStateChangeAsync = nextAppState => {
@@ -46,6 +48,10 @@ export default class App extends Component {
   componentWillUnmount() {
     AppState.removeEventListener('change', this.handleAppStateChangeAsync);
   }
+  
+  toggleModal = () => {
+    this.setState({ isModalVisible: !this.state.isModalVisible });
+  };
 
   onClickAsync = async () => {
       // const options = {
@@ -68,7 +74,8 @@ export default class App extends Component {
     axios.post('http://192.168.43.173:1337/mobile/image', data = {[this.state.word] : img})
       .then(res => {
         console.log(res);
-      });
+        this.toggleModal()
+      })
 
     this.setState({
       image: { img },
@@ -81,13 +88,24 @@ export default class App extends Component {
 
   render() {
 
-    word = randomWords({ min: 3, max: 10 });
-
     return (
       <View style={styles.container}>
+        <Modal coverScreen={true} isVisible={this.state.isModalVisible}>
+          <View>
+          <Card>
+            <CardItem>
+              <Body>
+                <Text>
+                   //Add stats here
+                </Text>
+              </Body>
+            </CardItem>
+          </Card>
+            <Button title="Hide modal" onPress={this.toggleModal} style={{alignItems:'center', justifyContent:'center'}}><Text style={{textAlign: 'center'}}>Close</Text></Button>
+          </View>
+        </Modal>
         <View style={styles.container}>
-              <Text style={styles.titleText}>{this.state.word}</Text>
-   
+          <Text style={styles.titleText}>{this.state.word}</Text>
           <View style={styles.sketchContainer}>
             
 
@@ -113,7 +131,9 @@ export default class App extends Component {
           <Text style={{textAlign: 'center'}}>undo</Text>
         </Button>
           </View>
-        <Button warning onPress={this.onClickAsync} style={{width:600, margin: 36, alignItems:'center', justifyContent:'center'}}><Text style={{textAlign: 'center'}}> Ready! </Text></Button>
+          <Button info onPress={ () => this.setState({word: randomWords()})} style={{width:600, marginTop: 18, marginBottom: 8, alignItems:'center', justifyContent:'center'}}><Text style={{textAlign: 'center'}}> Generate Word </Text></Button>
+
+        <Button warning onPress={this.onClickAsync} style={{width:600, marginTop: 8, alignItems:'center', justifyContent:'center'}}><Text style={{textAlign: 'center'}}> Ready! </Text></Button>
         </View>
 
 
@@ -125,7 +145,8 @@ export default class App extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center'
+    alignItems: 'center',
+    textAlign: 'center'
   },
   titleText: {
     fontSize: 80,
