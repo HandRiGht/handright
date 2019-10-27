@@ -54,27 +54,6 @@ export default class HomeScreen extends Component  {
                 <Picker.Item label="Spanish" value="Spanish" />
               </Picker>
             </View>
-<<<<<<< HEAD
-            <View style={styles.getButtonContainer}>
-              <View style={styles.button_1}>
-
-                <Button
-                    title="Learner"
-                    backgroundColor='#DDDDDD'
-                    onPress={() => {
-                      console.log('clicked');
-                    }}
-                />
-              </View>
-              <View style={styles.button_1}>
-                <Button
-                    title="Improver"
-                    onPress={() => {
-                      this.props.navigation.navigate("improver");
-
-                    }}
-                />
-=======
               <View style={styles.getButtonContainer}>
                 <TouchableOpacity onPress = {() => {this.props.navigation.navigate("learner");}}>
                   <View style = {styles.button_1}                >
@@ -86,11 +65,9 @@ export default class HomeScreen extends Component  {
                     <Text style = {{color: 'white'}}>Improver</Text>
                   </View>
                 </TouchableOpacity>
->>>>>>> b7a23f2350a4cb9fee60cb395480de6f4802b64f
               </View>
             </View>
-        </View>
-    );
+    )
   }
 
 }
@@ -140,8 +117,12 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   button_1: {
-    backgroundColor: '#DDDDDD',
-    height: 50,
+    backgroundColor: '#F7A119',
+    justifyContent: 'center',
+    alignItems:'center',
+    marginHorizontal: 20,
+    borderRadius: 15,
+    height: 45,
     width: 100,
     marginHorizontal: 20,
     //position: 'absolute',

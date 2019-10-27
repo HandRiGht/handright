@@ -25,7 +25,7 @@ export default class App extends Component {
                     style={styles.button}
                     onPress={this.onPress}
                 >
-                    <Text style = {{color: 'white'}}> Word </Text>
+                    <Text style = {{color: 'white'}} onPress = {() => {this.props.navigation.navigate("Links", {'profession': 'general'})}}> Word </Text>
                 </TouchableOpacity>
                 <TouchableOpacity
                     style={styles.button}
