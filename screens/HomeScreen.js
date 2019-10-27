@@ -42,17 +42,17 @@ export default class HomeScreen extends Component  {
               <Text> You have selected: {this.state.language}</Text>
               <Picker style={styles.getLanguagePicker}
                       selectedValue={this.state.language}
+                      style={{height: 50, width: 200}}
                       onValueChange={(itemValue, itemIndex) =>
                           this.setState({language: itemValue})
                       }>
-                <Picker.Item label="English"    value="English" />
-                <Picker.Item label="French"     value="French" />
-                <Picker.Item label="German"     value="German" />
-                <Picker.Item label="Italian"    value="Italian" />
+                <Picker.Item label="English" value="English" />
+                <Picker.Item label="French" value="French" />
+                <Picker.Item label="German" value="German" />
+                <Picker.Item label="Italian" value="Italian" />
                 <Picker.Item label="Portuguese" value="Portuguese" />
-                <Picker.Item label="Spanish"    value="Spanish" />
+                <Picker.Item label="Spanish" value="Spanish" />
               </Picker>
-
             </View>
             <View style={styles.getButtonContainer}>
               <View style={styles.button_1}>
@@ -61,23 +61,20 @@ export default class HomeScreen extends Component  {
                     title="Learner"
                     backgroundColor='#DDDDDD'
                     onPress={() => {
-                      this.props.navigation.navigate("learner");
+                      console.log('clicked');
                     }}
                 />
+              </View>
+              <View style={styles.button_1}>
+                <Button
+                    title="Improver"
+                    onPress={() => {
+                      this.props.navigation.navigate("improver");
 
+                    }}
+                />
               </View>
-              <View style={styles.getButtonContainer}>
-                <TouchableOpacity onPress = {() => {this.props.navigation.navigate("improver");}}>
-                  <View style = {styles.button_1}                >
-                  <Text style = {{color: 'white'}}>Learner</Text>
-                  </View>
-                </TouchableOpacity>
-                <TouchableOpacity onPress = {() => {this.props.navigation.navigate("improver");}}>
-                  <View style = {styles.button_1}>
-                    <Text style = {{color: 'white'}}>Improver</Text>
-                  </View>
-                </TouchableOpacity>
-              </View>
+            </View>
         </View>
     );
   }
@@ -129,19 +126,15 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   button_1: {
-    backgroundColor: '#F7A119',
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: 45,
+    backgroundColor: '#DDDDDD',
+    height: 50,
     width: 100,
     marginHorizontal: 20,
-    borderRadius: 15,
     //position: 'absolute',
     bottom:-70,
   },
   getLanguagePicker:{
-    height: 50,
-    width: 200,
+
   },
   getButtonContainer:{
     flexDirection: 'row',

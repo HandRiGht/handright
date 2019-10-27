@@ -16,7 +16,7 @@ const config = Platform.select({
 
 const HomeStack = createStackNavigator(
   {
-    Home: HomeScreen, improver: professionScreen, learner: LearnerOptions,
+    Home: HomeScreen, improver: professionScreen, learner: LearnerOptions, 
   },
   config
 );

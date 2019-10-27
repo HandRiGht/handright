@@ -42,7 +42,7 @@ export default class HomeScreen extends Component  {
                     </Picker>
                 </View>
                 <View style={styles.getButtonContainer}>
-                    <TouchableOpacity onPress = {() => {this.props.navigation.navigate("improver");}}>
+                    <TouchableOpacity onPress = {() => {this.props.navigation.navigate("Links", {'profession': this.state.profession})}}>
                         <View style = {styles.button_1}>
                         <Text style = {{color: 'white'}}>Okay</Text>
                         </View>
