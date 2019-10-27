@@ -61,14 +61,14 @@ export default class App extends Component {
       // };
     
     const { uri } = await this.sketch.takeSnapshotAsync();
-    console.log(uri)
+    console.log(uri);
 
     const img = await FileSystem.readAsStringAsync(uri, {encoding: FileSystem.EncodingType.Base64})
 
     axios.interceptors.request.use(request => {
-      console.log('Starting Request', data = {request})
+      console.log('Starting Request', data = {request});
       return request
-    })
+    });
 
 
     axios.post('http://192.168.43.173:1337/mobile/image', data = {[this.state.word] : img})

@@ -55,25 +55,16 @@ export default class HomeScreen extends Component  {
               </Picker>
             </View>
             <View style={styles.getButtonContainer}>
-              <View style={styles.button_1}>
-
-                <Button
-                    title="Learner"
-                    backgroundColor='#DDDDDD'
-                    onPress={() => {
-                      console.log('clicked');
-                    }}
-                />
-              </View>
-              <View style={styles.button_1}>
-                <Button
-                    title="Improver"
-                    onPress={() => {
-                      this.props.navigation.navigate("improver");
-
-                    }}
-                />
-              </View>
+              <TouchableOpacity onPress = {() => {/* do this */}}>
+                <View style = {styles.button_1}                >
+                <Text style = {{color: 'white'}}>Learner</Text>
+                </View>
+              </TouchableOpacity>
+              <TouchableOpacity onPress = {() => {this.props.navigation.navigate("improver");}}>
+                <View style = {styles.button_1}                >
+                  <Text style = {{color: 'white'}}>Improver</Text>
+                </View>
+              </TouchableOpacity>
             </View>
         </View>
     );
@@ -126,10 +117,13 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   button_1: {
-    backgroundColor: '#DDDDDD',
-    height: 50,
+    backgroundColor: '#F7A119',
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: 45,
     width: 100,
     marginHorizontal: 20,
+    borderRadius: 15,
     //position: 'absolute',
     bottom:-70,
   },
