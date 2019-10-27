@@ -63,7 +63,7 @@ export default class HomeScreen extends Component  {
                     title="Learner"
                     backgroundColor='#DDDDDD'
                     onPress={() => {
-                      console.log('clicked');
+                      this.props.navigation.navigate("learner");
                     }}
                 />
               </View>
