@@ -56,8 +56,10 @@ export default class HomeScreen extends Component  {
             </View>
             <View style={styles.getButtonContainer}>
               <View style={styles.button_1}>
+
                 <Button
                     title="Learner"
+                    backgroundColor='#DDDDDD'
                     onPress={() => {
                       console.log('clicked');
                     }}
@@ -67,7 +69,8 @@ export default class HomeScreen extends Component  {
                 <Button
                     title="Improver"
                     onPress={() => {
-                      console.log('clicked');
+                      this.props.navigation.navigate("improver");
+
                     }}
                 />
               </View>
@@ -115,11 +118,20 @@ const styles = StyleSheet.create({
     marginTop: 3,
     marginLeft: -10,
   },
+
   getStartedContainer: {
     alignItems: 'center',
     marginHorizontal: 50,
     marginTop: 25,
     flex: 1,
+  },
+  button_1: {
+    backgroundColor: '#DDDDDD',
+    height: 50,
+    width: 100,
+    marginHorizontal: 20,
+    //position: 'absolute',
+    bottom:-70,
   },
   getLanguagePicker:{
 
