@@ -21,23 +21,23 @@ export default class App extends Component {
     {
         return(
             <View style={styles.container}>
-            <TouchableOpacity
-                style={styles.button}
-                onPress={this.onPress}
-            >
-                <Text> Word </Text>
-            </TouchableOpacity>
                 <TouchableOpacity
                     style={styles.button}
                     onPress={this.onPress}
                 >
-                    <Text> Sentence </Text>
+                    <Text style = {{color: 'white'}}> Word </Text>
                 </TouchableOpacity>
-        </View>
+                <TouchableOpacity
+                    style={styles.button}
+                    onPress={this.onPress}
+                >
+                    <Text style = {{color: 'white'}}> Sentence </Text>
+                </TouchableOpacity>
+            </View>
 
-            );
+        );
     }
-    }
+}
 
 
 
@@ -54,8 +54,10 @@ const styles = StyleSheet.create({
     },
     button: {
         alignItems: 'center',
-        backgroundColor: '#DDDDDD',
-        padding: 50,
+        justifyContent: 'center',
+        backgroundColor: '#F7A119',
+        borderRadius: 15,
+        padding: 20,
         marginHorizontal: 20
     },
 });

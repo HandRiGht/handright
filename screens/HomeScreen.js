@@ -54,6 +54,7 @@ export default class HomeScreen extends Component  {
                 <Picker.Item label="Spanish" value="Spanish" />
               </Picker>
             </View>
+<<<<<<< HEAD
             <View style={styles.getButtonContainer}>
               <View style={styles.button_1}>
 
@@ -73,6 +74,19 @@ export default class HomeScreen extends Component  {
 
                     }}
                 />
+=======
+              <View style={styles.getButtonContainer}>
+                <TouchableOpacity onPress = {() => {this.props.navigation.navigate("learner");}}>
+                  <View style = {styles.button_1}                >
+                  <Text style = {{color: 'white'}}>Learner</Text>
+                  </View>
+                </TouchableOpacity>
+                <TouchableOpacity onPress = {() => {this.props.navigation.navigate("improver");}}>
+                  <View style = {styles.button_1}>
+                    <Text style = {{color: 'white'}}>Improver</Text>
+                  </View>
+                </TouchableOpacity>
+>>>>>>> b7a23f2350a4cb9fee60cb395480de6f4802b64f
               </View>
             </View>
         </View>
