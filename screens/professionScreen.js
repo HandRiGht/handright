@@ -25,33 +25,66 @@ export default class HomeScreen extends Component  {
     }
     render() {
         return (
-            <View style={styles.getStartedContainer}>
-                <Text> You have selected: {this.state.profession}</Text>
-                <Picker style={styles.getLanguagePicker}
-                        selectedValue={this.state.profession}
-                        style={{height: 50, width: 200}}
-                        onValueChange={(itemValue, itemIndex) =>
-                            this.setState({profession: itemValue})
-                        }>
-                    <Picker.Item label="General" value="General"/>
-                    <Picker.Item label="Healthcare professional" value="Healthcare professional"/>
-                    <Picker.Item label="Engineer/Technologist" value="Engineer/Technologist"/>
-                    <Picker.Item label="Lawyer" value="Lawyer"/>
-                    <Picker.Item label="Business" value="Business"/>
-                    <Picker.Item label="Scientist" value="Scientist"/>
-                </Picker>
+            <View style={styles.container}>
+                <View style={styles.getStartedContainer}>
+                    <Text> You have selected: {this.state.profession}</Text>
+                    <Picker style={styles.getLanguagePicker}
+                            selectedValue={this.state.profession}
+                            onValueChange={(itemValue, itemIndex) =>
+                                this.setState({profession: itemValue})
+                            }>
+                        <Picker.Item label="General" value="General"/>
+                        <Picker.Item label="Healthcare professional" value="Healthcare professional"/>
+                        <Picker.Item label="Engineer/Technologist" value="Engineer/Technologist"/>
+                        <Picker.Item label="Lawyer" value="Lawyer"/>
+                        <Picker.Item label="Business" value="Business"/>
+                        <Picker.Item label="Scientist" value="Scientist"/>
+                    </Picker>
+                </View>
+                <View style={styles.getButtonContainer}>
+                    <TouchableOpacity onPress = {() => {this.props.navigation.navigate("improver");}}>
+                        <View style = {styles.button_1}>
+                        <Text style = {{color: 'white'}}>Okay</Text>
+                        </View>
+                    </TouchableOpacity>
+                </View>
             </View>
         );
     }
 }
 
 const styles = StyleSheet.create({
-
+    container: {
+        flex: 1,
+        backgroundColor: '#fff',
+        alignItems: 'center',
+    },
     getStartedContainer: {
         alignItems: 'center',
         marginHorizontal: 50,
         marginTop: 25,
         flex: 1,
+    },
+    getLanguagePicker:{
+        height: 50,
+        width: 200,
+    },
+    getButtonContainer:{
+        flexDirection: 'row',
+        flex: 1,
+        marginTop: 40,
+        marginHorizontal: 50,
+    },
+    button_1: {
+        backgroundColor: '#F7A119',
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: 45,
+        width: 100,
+        marginHorizontal: 20,
+        borderRadius: 15,
+        //position: 'absolute',
+        bottom:-70,
     },
 }
 );
