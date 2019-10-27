@@ -31,11 +31,9 @@ export default class HomeScreen extends Component  {
 
             <View style={styles.welcomeContainer}>
               <Image
-                  source={
-                    __DEV__
-                        ? require('/Users/olasubomiawolesi/handright/Logo2.png')
-                        : require('../assets/images/robot-prod.png')
-                  }
+                  source={{uri:'https://raw.githubusercontent.com/HandRiGht/handright/master/Logo2.png'
+                }}
+                  
                   style={styles.welcomeImage}
               />
             </View>

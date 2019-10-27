@@ -104,22 +104,16 @@ export default class App extends Component {
           <Button 
           light
           color={'blue'}
-          style={{textAlign: 'center'}}
+          style={{textAlign: 'center', alignItems:'center', justifyContent:'center'}}
           title="undo"
           onPress={() => {
             this.sketch.undo();
           }}
         >
-          <Text>undo</Text>
+          <Text style={{textAlign: 'center'}}>undo</Text>
         </Button>
           </View>
-          {/* <View style={styles.imageContainer}>
-            <View style={styles.label}>
-              <Text>Snapshot</Text>
-            </View>
-            <Image style={styles.image} source={this.state.image} />
-          </View> */}
-        <Button success onPress={this.onClickAsync}><Text> Ready! </Text></Button>
+        <Button warning onPress={this.onClickAsync} style={{width:600, margin: 36, alignItems:'center', justifyContent:'center'}}><Text style={{textAlign: 'center'}}> Ready! </Text></Button>
         </View>
 
 
@@ -134,7 +128,8 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   titleText: {
-    fontSize: 40,
+    fontSize: 80,
+    margin: 36,
     textAlign: 'center'
   },
   sketch: {
