@@ -8,6 +8,8 @@ import * as FileSystem from 'expo-file-system';
 import { Base64 } from 'js-base64';
 // import randomWords from 'random-words';
 import Modal from "react-native-modal";
+import fetch from 'node-fetch'
+import { Buffer } from 'buffer'
 
 const isAndroid = Platform.OS === 'android';
 function uuidv4() {
@@ -29,6 +31,8 @@ export default class App extends Component {
     word: null,
     isModalVisible: false,
     selection: wordList,
+    score: null,
+    heatMap: null
   };
 
   handleAppStateChangeAsync = nextAppState => {
@@ -62,25 +66,35 @@ export default class App extends Component {
       // };
     
     const { uri } = await this.sketch.takeSnapshotAsync();
-    console.log(uri);
 
     const img = await FileSystem.readAsStringAsync(uri, {encoding: FileSystem.EncodingType.Base64})
 
-    axios.interceptors.request.use(request => {
-      console.log('Starting Request', data = {request});
-      return request
-    });
+    // axios.interceptors.request.use(request => {
+    //   console.log('Starting Request', data = {request});
+    //   return request
+    // });
 
 
     axios.post('http://192.168.43.173:1337/mobile/image', data = {[this.state.word] : img})
       .then(res => {
-        console.log(res);
         this.toggleModal()
+        axios.get('http://192.168.43.173:1337/mobile/score').then(res => {
+          this.setState({score: res.data})
+          console.log(res.data)
+
+             axios
+              .get("http://192.168.43.173:1337/mobile/check", {
+                responseType: 'arraybuffer'
+              })
+              .then(response => this.setState({heatMap: new Buffer.from(response.data, 'binary').toString('base64')}))
+        })
+
       })
 
-    this.setState({
-      image: { img },
-    });
+      
+    // this.setState({
+    //   image: { img },
+    // });
   };
 
   onReady = () => {
@@ -88,7 +102,6 @@ export default class App extends Component {
   };
 
   render() {
-
     return (
       <View style={styles.container}>
         <Modal coverScreen={true} isVisible={this.state.isModalVisible}>
@@ -96,8 +109,9 @@ export default class App extends Component {
           <Card>
             <CardItem>
               <Body>
+              <Image style={{height:300, width:400}} source={{uri: "data:image/png;base64," + this.state.heatMap}}/>
                 <Text>
-                   //Add stats here
+                   {`Score: ${Math.round(this.state.score)}/600`}
                 </Text>
               </Body>
             </CardItem>
@@ -108,7 +122,7 @@ export default class App extends Component {
         <View style={styles.container}>
           <Text style={styles.titleText}>{this.state.word}</Text>
           <View style={styles.sketchContainer}>
-            
+
 
             <ExpoPixi.Sketch
               ref={ref => (this.sketch = ref)}
@@ -116,7 +130,7 @@ export default class App extends Component {
               strokeColor={this.state.strokeColor}
               strokeWidth={this.state.strokeWidth}
               strokeAlpha={0.5}
-              onReady={this.onReady}
+              onReady={() => this.onReady}
               initialLines={this.state.lines}
             />
               
@@ -132,9 +146,9 @@ export default class App extends Component {
           <Text style={{textAlign: 'center'}}>undo</Text>
         </Button>
           </View>
-          <Button info onPress={ () => this.setState({word: generateRandomWord(this.props.navigation.getParam("profession", "general"))})} style={{width:600, marginTop: 18, marginBottom: 8, alignItems:'center', justifyContent:'center'}}><Text style={{textAlign: 'center'}}> Generate Word </Text></Button>
+          <Button info onPress={() => this.setState({word: generateRandomWord(this.props.navigation.getParam("profession", "general"))})} style={{width:600, marginTop: 18, marginBottom: 8, alignItems:'center', justifyContent:'center'}}><Text style={{textAlign: 'center'}}> Generate Word </Text></Button>
 
-        <Button warning onPress={this.onClickAsync} style={{width:600, marginTop: 8, alignItems:'center', justifyContent:'center'}}><Text style={{textAlign: 'center'}}> Ready! </Text></Button>
+        <Button warning onPress={() => this.onClickAsync()} style={{width:600, marginTop: 8, alignItems:'center', justifyContent:'center'}}><Text style={{textAlign: 'center'}}> Ready! </Text></Button>
         </View>
 
 
